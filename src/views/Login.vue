@@ -1,9 +1,31 @@
 <template>
   <div id="login">
-    <h1>Login</h1>
-    <input type="text" name="username" v-model="input.username" placeholder="Username" />
-    <input type="password" name="password" v-model="input.password" placeholder="Password" />
-    <button type="button" v-on:click="login()">Login</button>
+    <div class="login-form">
+      <h2 class="text-center">Log in</h2>
+      <div class="form-group">
+        <input
+          type="text"
+          name="username"
+          v-model="input.username"
+          placeholder="Username"
+          class="form-control"
+          required="required"
+        />
+      </div>
+      <div class="form-group">
+        <input
+          type="password"
+          name="password"
+          v-model="input.password"
+          placeholder="Password"
+          class="form-control"
+          required="required"
+        />
+      </div>
+      <div class="form-group">
+        <button type="button" class="btn btn-primary btn-block" v-on:click="login()">Login</button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -13,24 +35,19 @@ export default {
   data() {
     return {
       input: {
-        username: "",
-        password: "",
+        username: "a",
+        password: "a",
       },
     };
   },
   methods: {
     login() {
       console.log("login ...");
-      console.log(this.input);
-      console.log(this.input.username);
-      console.log(this.input.password);
-
       if (this.input.username != "" && this.input.password != "") {
         if (
           this.input.username == this.$parent.mockAccount.username &&
           this.input.password == this.$parent.mockAccount.password
         ) {
-          console.log("login ..---.");
           this.$emit("authenticated", true);
           this.$router.replace({ name: "Home" });
         } else {
