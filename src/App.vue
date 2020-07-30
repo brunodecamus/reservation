@@ -1,12 +1,49 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    authenticated : {{authenticated}}
+    <div v-if="authenticated" id="nav">
+      <router-link to="/">Home</router-link>|
+      <router-link to="/login">Login</router-link>|
+      <router-link to="/about">About</router-link>| | |
+      <router-link to="/login" v-on:click.native="logout()" replace>Logout</router-link>
     </div>
-    <router-view/>
+
+    <router-view @authenticated="setAuthenticated" />
   </div>
 </template>
+
+<script>
+export default {
+  name: "App",
+  data() {
+    return {
+      authenticated: false,
+      mockAccount: {
+        username: "a",
+        password: "a",
+      },
+    };
+  },
+  mounted() {
+    console.log("mounted ...");
+    console.log(this.$router);
+    if (!this.authenticated) {
+      this.$router.replace({ name: "Login" });
+    }
+  },
+  methods: {
+    setAuthenticated(status) {
+      console.log("setAuthenticated ...");
+      this.authenticated = status;
+    },
+    logout() {
+      console.log("logout ...");
+      this.authenticated = false;
+    },
+  },
+};
+</script>
+
 
 <style>
 #app {
