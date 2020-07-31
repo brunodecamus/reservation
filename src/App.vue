@@ -15,10 +15,13 @@
       <div class="collapse navbar-collapse" id="main_nav">
         <ul class="navbar-nav">
           <li class="nav-item" v-bind:class="{'active':(menu === 0)}">
-            <router-link to="/" class="nav-link" v-on:click.native="menu=0">Home</router-link>
+            <router-link to="/home" class="nav-link" v-on:click.native="menu=0">Home</router-link>
           </li>
           <li class="nav-item" v-bind:class="{'active':(menu === 1)}">
-            <router-link to="/about" class="nav-link" v-on:click.native="menu=1">About</router-link>
+            <router-link to="/create" class="nav-link" v-on:click.native="menu=1">Create</router-link>
+          </li>
+          <li class="nav-item" v-bind:class="{'active':(menu === 2)}">
+            <router-link to="/pendingItem" class="nav-link" v-on:click.native="menu=2">Pending Items</router-link>
           </li>
         </ul>
         <ul class="navbar-nav ml-auto">

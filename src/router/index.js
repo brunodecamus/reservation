@@ -1,16 +1,22 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import Create from '../views/Create.vue'
 import Login from '../views/Login.vue'
-import About from '../views/About.vue'
+import PendingItem from '../views/PendingItem.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
+    path: '/home',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/create',
+    name: 'Create',
+    component: Create
   },
   {
     path: '/login',
@@ -18,9 +24,9 @@ const routes = [
     component: Login
   },
   {
-    path: '/about',
-    name: 'About',
-    component: About
+    path: '/pendingItem',
+    name: 'PendingItem',
+    component: PendingItem
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
