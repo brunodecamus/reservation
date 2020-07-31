@@ -14,11 +14,11 @@
       </button>
       <div class="collapse navbar-collapse" id="main_nav">
         <ul class="navbar-nav">
-          <li class="nav-item active">
-            <router-link to="/" class="nav-link">Home</router-link>
+          <li class="nav-item" v-bind:class="{'active':(menu === 0)}">
+            <router-link to="/" class="nav-link" v-on:click.native="menu=0">Home</router-link>
           </li>
-          <li class="nav-item">
-            <router-link to="/about" class="nav-link">About</router-link>
+          <li class="nav-item" v-bind:class="{'active':(menu === 1)}">
+            <router-link to="/about" class="nav-link" v-on:click.native="menu=1">About</router-link>
           </li>
         </ul>
         <ul class="navbar-nav ml-auto">
@@ -30,8 +30,7 @@
     </nav>
 
     <section class="section-content py-5">
-      --
-      <router-view @authenticated="setAuthenticated" />--
+      <router-view @authenticated="setAuthenticated" />
     </section>
   </div>
 </template>
@@ -42,6 +41,8 @@ export default {
   data() {
     return {
       authenticated: false,
+      // Selectionne le menu
+      menu: 0,
       mockAccount: {
         username: "a",
         password: "a",
@@ -63,6 +64,10 @@ export default {
     logout() {
       console.log("logout ...");
       this.authenticated = false;
+    },
+    say(message) {
+      console.log(message);
+      console.log(this);
     },
   },
 };
