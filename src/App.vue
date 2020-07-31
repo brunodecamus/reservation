@@ -29,9 +29,8 @@
       </div>
     </nav>
 
-    <section class="section-content py-5">
-      <router-view @authenticated="setAuthenticated" />
-    </section>
+    <br />
+    <router-view @authenticated="setAuthenticated" />
   </div>
 </template>
 
