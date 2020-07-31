@@ -1,33 +1,18 @@
 <template>
-  <div id="app">
-    <!--
-    <div v-if="authenticated" id="nav">
-      <router-link to="/">Home</router-link>|
-      <router-link to="/login">Login</router-link>|
-      <router-link to="/about">About</router-link>| | |
-      <router-link to="/login" v-on:click.native="logout()" replace>Logout</router-link>
-    </div>
-    -->
-
-    <!-- Menu toujours au TOP -->
-    <nav
-      id="nav"
-      v-if="authenticated"
-      class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary"
-    >
+  <div id="app" class="container">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary" v-if="authenticated">
       <a class="navbar-brand" href="#">Study</a>
       <button
         class="navbar-toggler"
         type="button"
         data-toggle="collapse"
-        data-target="#navbarNav"
-        aria-controls="navbarNav"
+        data-target="#main_nav"
         aria-expanded="false"
         aria-label="Toggle navigation"
       >
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
+      <div class="collapse navbar-collapse" id="main_nav">
         <ul class="navbar-nav">
           <li class="nav-item active">
             <router-link to="/" class="nav-link">Home</router-link>
@@ -35,15 +20,19 @@
           <li class="nav-item">
             <router-link to="/about" class="nav-link">About</router-link>
           </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
           <li class="nav-item">
             <router-link to="/login" v-on:click.native="logout()" replace class="nav-link">Logout</router-link>
           </li>
         </ul>
       </div>
     </nav>
-    <!-- Cette div pour que les vue commencent a la bonne hauteur -->
-    <div style="height:56px"></div>
-    <router-view @authenticated="setAuthenticated" />
+
+    <section class="section-content py-5">
+      --
+      <router-view @authenticated="setAuthenticated" />--
+    </section>
   </div>
 </template>
 
