@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-12 text-primary bg-light border border-primary rounded">
         Creation d'un Study
-        <form>
+        <form action="#">
           <!-- Name -->
           <div class="form-group row">
             <label for="idName" class="col-3 col-form-label">Name</label>
@@ -52,7 +52,7 @@
           <!-- Submit -->
           <div class="form-group row">
             <div class="offset-3 col-9">
-              <button name="submit" type="submit" class="btn btn-primary">Create</button>
+              <button name="submit" type="submit" class="btn btn-primary" @click="submit">Create</button>
             </div>
           </div>
         </form>
@@ -64,19 +64,22 @@
 <script>
 // @ is an alias to /src
 //import CreateStudy from "@/components/CreateStudy.vue";
-//import PendingStudy from "@/components/PendingStudy.vue";
-//import CreateStudyForm from "@/components/CreateStudyForm.vue";
 
 export default {
-  name: "Home",
+  name: "Create",
   components: {
-    //HelloWorld,
-    //CreateStudy,
-    //PendingStudy,
     //CreateStudyForm,
+  },
+  methods: {
+    submit() {
+      console.log("form submitted .................");
+    },
   },
 };
 </script>
+
+
+
 
 <style>
 zone {
