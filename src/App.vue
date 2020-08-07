@@ -25,6 +25,7 @@
           </li>
         </ul>
         <ul class="navbar-nav ml-auto">
+          <li class="nav-link disabled" style="font-weight: bold;">{{user.displayName}}</li>
           <li class="nav-item">
             <router-link to="/login" v-on:click.native="logout()" replace class="nav-link">Logout</router-link>
           </li>
@@ -33,7 +34,7 @@
     </nav>
 
     <br />
-    <router-view @authenticated="setAuthenticated" />
+    <router-view @authenticated="setAuthenticated" @user="setUser" />
   </div>
 </template>
 
@@ -43,29 +44,35 @@ export default {
   data() {
     return {
       authenticated: false,
-      // Selectionne le menu
-      menu: 0,
-      mockAccount: {
-        username: "a",
-        password: "a",
+      user: {
+        id: 0,
+        username: "-",
+        password: "-",
+        displayName: "-",
       },
+      // Selectionne le menu (0.,1,2, ...)
+      menu: 0,
     };
   },
   mounted() {
-    console.log("mounted ...");
-    console.log(this.$router);
+    console.log("App.mounted()");
     if (!this.authenticated) {
       this.$router.replace({ name: "Login" });
     }
   },
   methods: {
     setAuthenticated(status) {
-      console.log("setAuthenticated ...");
+      console.log("App.setAuthenticated()");
       this.authenticated = status;
+    },
+    setUser(user) {
+      console.log("App.setUser()");
+      this.user = JSON.parse(user);
     },
     logout() {
       console.log("logout ...");
       this.authenticated = false;
+      this.user = null;
     },
     say(message) {
       console.log(message);

@@ -44,7 +44,7 @@ export default {
   data() {
     return {
       input: {
-        username: "aa",
+        username: "bdecamus",
         password: "a",
       },
       errors: [],
@@ -71,6 +71,7 @@ export default {
         .then((response) => {
           console.log("L'utilisateur existe : ", response);
           this.$emit("authenticated", true);
+          this.$emit("user", response.data);
           this.$router.replace({ name: "Home" });
         })
         .catch((e) => {
