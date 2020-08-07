@@ -25,37 +25,59 @@
       <div class="form-group">
         <button type="button" class="btn btn-primary btn-block" v-on:click="login()">Login</button>
       </div>
+
+      <div v-for="error in errors" :key="error">{{ error }}</div>
     </div>
   </div>
 </template>
 
 <script>
+import Vue from "vue";
+import axios from "axios";
+import VueAxios from "vue-axios";
+
+Vue.use(VueAxios, axios);
+
 export default {
   name: "Login",
+
   data() {
     return {
       input: {
-        username: "a",
+        username: "aa",
         password: "a",
       },
+      errors: [],
     };
   },
   methods: {
     login() {
-      console.log("login ...");
-      if (this.input.username != "" && this.input.password != "") {
-        if (
-          this.input.username == this.$parent.mockAccount.username &&
-          this.input.password == this.$parent.mockAccount.password
-        ) {
+      console.log(
+        "Login. Appel service REST http://localhost:5000/api/v1.0/user"
+      );
+
+      Vue.axios
+        .get("http://localhost:5000/api/v1.0/user", {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods":
+              "GET, POST, PATCH, PUT, DELETE, OPTIONS",
+            "Access-Control-Allow-Headers":
+              "Origin, Content-Type, X-Auth-Token",
+            username: this.input.username,
+            password: this.input.password,
+          },
+        })
+        .then((response) => {
+          console.log("L'utilisateur existe : ", response);
           this.$emit("authenticated", true);
           this.$router.replace({ name: "Home" });
-        } else {
-          console.log("The username and / or password is incorrect");
-        }
-      } else {
-        console.log("A username and password must be present");
-      }
+        })
+        .catch((e) => {
+          console.log("Aucune info sur l utilisateur ou erreur: ", e);
+          this.errors = [];
+          this.errors.push("Unknown username or bad password.");
+        });
     },
   },
 };
