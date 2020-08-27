@@ -1,3 +1,8 @@
+#
+# Pour executer ce serveur
+# Ouvrir un 'Anaconda PowerShell Prompt'
+# python C:\appli\gitRepository\medica1\server-python\server.py
+#
 from flask import Flask, jsonify
 from flask_cors import CORS
 from flask import request

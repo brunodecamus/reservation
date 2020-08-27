@@ -8,7 +8,14 @@
           <div class="form-group row">
             <label for="idName" class="col-3 col-form-label">Name</label>
             <div class="col-9">
-              <input id="idName" name="idName" type="text" required="required" class="form-control" />
+              <input
+                id="idName"
+                name="idName"
+                type="text"
+                required="required"
+                class="form-control"
+                v-model="name"
+              />
             </div>
           </div>
 
@@ -16,7 +23,13 @@
           <div class="form-group row">
             <label for="idValidation" class="col-3 col-form-label">Validation threshold</label>
             <div class="col-9">
-              <input id="idValidation" name="idValidation" type="text" class="form-control" />
+              <input
+                id="idValidation"
+                name="idValidation"
+                type="range"
+                class="form-control"
+                v-model="validation"
+              />
             </div>
           </div>
 
@@ -24,7 +37,13 @@
           <div class="form-group row">
             <label class="col-3 col-form-label">Domain</label>
             <div class="col-9">
-              <select id="idDomain" name="idDomain" class="custom-select" multiple="multiple">
+              <select
+                id="idDomain"
+                name="idDomain"
+                class="custom-select"
+                multiple="multiple"
+                v-model="domain"
+              >
                 <option value="Dev">Dev</option>
                 <option value="Math">Math</option>
                 <option value="Anglais">Anglais</option>
@@ -37,7 +56,7 @@
           <div class="form-group row">
             <label for="idItems" class="col-3 col-form-label">Items</label>
             <div class="col-9">
-              <input id="idItems" name="idItems" type="text" class="form-control" />
+              <input id="idItems" name="idItems" type="text" class="form-control" v-model="items" />
             </div>
           </div>
 
@@ -45,7 +64,13 @@
           <div class="form-group row">
             <label for="idParticipants" class="col-3 col-form-label">Participants threshold</label>
             <div class="col-9">
-              <input id="idParticipants" name="idParticipants" type="text" class="form-control" />
+              <input
+                id="idParticipants"
+                name="idParticipants"
+                type="text"
+                class="form-control"
+                v-model="participants"
+              />
             </div>
           </div>
 
@@ -69,6 +94,15 @@ export default {
   name: "Create",
   components: {
     //CreateStudyForm,
+  },
+  data: function () {
+    return {
+      name: "Mon test 1",
+      validation: 50,
+      domain: ["Sport"],
+      items: "",
+      participants: "Jean, Paul",
+    };
   },
   methods: {
     submit() {
