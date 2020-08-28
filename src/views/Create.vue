@@ -87,8 +87,11 @@
 </template>
 
 <script>
-// @ is an alias to /src
-//import CreateStudy from "@/components/CreateStudy.vue";
+import Vue from "vue";
+import axios from "axios";
+import VueAxios from "vue-axios";
+
+Vue.use(VueAxios, axios);
 
 export default {
   name: "Create",
@@ -106,7 +109,36 @@ export default {
   },
   methods: {
     submit() {
-      console.log("form submitted .................");
+      console.log("Submit form ...");
+
+      // Pas de validation pour le moment
+      console.log(this.$data);
+
+      const study = {
+        name: this.$data.name,
+        validation: this.$data.validation,
+        domain: this.$data.domain,
+        items: this.$data.items,
+        participants: this.$data.participants,
+      };
+
+      Vue.axios
+        .post("http://localhost:5000/api/v1.0/study", study, {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods":
+              "GET, POST, PATCH, PUT, DELETE, OPTIONS",
+            "Access-Control-Allow-Headers":
+              "Origin, Content-Type, X-Auth-Token",
+          },
+        })
+        .then((response) => {
+          console.log("OK : ", response);
+          //this.$router.replace({ name: "Home" });
+        })
+        .catch((e) => {
+          console.log("ERR : ", e);
+        });
     },
   },
 };

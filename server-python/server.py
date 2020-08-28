@@ -30,6 +30,26 @@ users = [
     User(2, 'bdecamus', 'a', 'Bruno Decamus')
 ]
 
+# ------------------- Class Study -------------------
+
+
+class Study:
+    def __init__(self, id, name, validation, domain, items, participants):
+        self.id = id
+        self.name = name
+        self.validation = validation
+        self.domain = domain
+        self.items = items
+        self.participants = participants
+
+
+# ------------------- List des studies -------------------
+# ------------------- (Un jour sera une une base) -------------------
+studies = [
+    Study(1, 'Study Auto', 30, 'Math', 'item 108', 'Eric, Pierre'),
+    Study(2, 'Study Medical', 10, 'Anglais', 'item 878', 'Bruno, Emilien')
+]
+
 
 class MyEncoder(json.JSONEncoder):
     def default(self, obj):
@@ -41,9 +61,8 @@ class MyEncoder(json.JSONEncoder):
 
 @app.route('/api/v1.0/user', methods=['GET'])
 def get_users():
-
     print("-------------------------------------------------------------")
-    print("Entre dans GET /api/v1.0/users")
+    print("Entre dans GET /api/v1.0/users => Verifie si l'utilateur existe")
     username = request.headers.get('username')
     password = request.headers.get('password')
     print("Verifie si l'utilisateur suivant existe : username : ",
@@ -57,6 +76,16 @@ def get_users():
 
     print("Ce user n'existe pas. On retourne une HTTP 401")
     abort(401)
+
+
+@app.route('/api/v1.0/study', methods=['POST'])
+def post_study():
+    print("-------------------------------------------------------------")
+    print("Entre dans POST /api/v1.0/study => Creation d'un study")
+    json = request.get_json()
+    print(json)
+
+    return jsonify(json)
 
 
 if __name__ == '__main__':
